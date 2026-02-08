@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - NOWNEXT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="top-header">
+        <div class="logo" onclick="location.href='index.html'" style="cursor:pointer;">⬅ NOWNEXT</div>
+    </header>
+
+    <div class="container">
+        <h3 class="section-title">Order Summary</h3>
+        
+        <div id="cart-items-container" class="cart-items-list">
+            </div>
+
+        <div class="bill-details">
+            <div class="bill-row"><span>Item Total</span><span id="subtotal">₹0</span></div>
+            <div class="bill-row"><span>GST & Tax</span><span>₹7</span></div>
+            <div class="bill-row"><span>Platform Fee</span><span>₹3</span></div>
+            <div class="bill-row"><span>Delivery Fee</span><span id="delivery-fee">₹0</span></div>
+            <hr>
+            <div class="bill-row total"><span>Grand Total</span><span id="grand-total">₹0</span></div>
+        </div>
+
+        <div class="checkout-form">
+            <h3 class="section-title">Delivery Details</h3>
+            <input type="text" id="userName" placeholder="Full Name" required>
+            <input type="tel" id="userPhone" placeholder="Phone Number" required>
+            
+            <select id="userCollege">
+                <option value="">Select College</option>
+                <option value="REC Kannauj">REC Kannauj</option>
+                <option value="Mahamaya Polytechnic">Mahamaya Polytechnic</option>
+                <option value="GMC">GMC</option>
+            </select>
+
+            <select id="deliveryType" onchange="updateBill()">
+                <option value="instant">Instant Delivery (₹30)</option>
+                <option value="slot">Slot Wise Delivery (₹20)</option>
+            </select>
+
+            <select id="deliverySlot" style="display:none;">
+                <option value="07:30 AM - 08:30 AM">07:30 AM - 08:30 AM</option>
+                <option value="01:30 PM - 02:30 PM">01:30 PM - 02:30 PM</option>
+                <option value="05:00 PM - 06:00 PM">05:00 PM - 06:00 PM</option>
+                <option value="08:30 PM - 10:00 PM">08:30 PM - 10:00 PM</option>
+            </select>
+
+            <select id="paymentMethod">
+                <option value="Cash on Delivery">Cash on Delivery</option>
+                <option value="Online Payment">Online Payment</option>
+            </select>
+
+            <p id="min-order-msg" style="color:red; font-size:12px; margin-top:10px; display:none;">Minimum order should be ₹100</p>
+            
+            <button class="confirm-btn" onclick="sendToWhatsApp()">Confirm Order</button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        // Specific logic for Cart Page
+        window.onload = function() {
+            displayCart();
+            updateBill();
+        };
+
+        // Show/Hide slot dropdown based on delivery type
+        document.getElementById('deliveryType').addEventListener('change', function() {
+            const slotSelect = document.getElementById('deliverySlot');
+            slotSelect.style.display = (this.value === 'slot') ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
