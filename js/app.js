@@ -152,12 +152,16 @@ function sendToWhatsApp() {
 }
 function filterCategory(category) {
     const products = document.querySelectorAll('.product-card');
-
+    
     products.forEach(product => {
-        if (product.getAttribute('data-category') === category) {
-            product.style.display = 'flex';
+        // Get the category from the 'data-category' attribute
+        const productCat = product.getAttribute('data-category');
+        
+        // Use lowercase 'all' to match the function call
+        if (category === 'all' || productCat === category) {
+            product.style.display = 'flex'; // Shows the product
         } else {
-            product.style.display = 'none';
+            product.style.display = 'none'; // Hides the product
         }
     });
 }
