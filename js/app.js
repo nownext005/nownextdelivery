@@ -166,3 +166,23 @@ function filterCategory(category) {
     });
 }
 
+// Search Functionality
+function searchProducts() {
+    // 1. Get the text typed by the user and convert to lowercase
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    
+    // 2. Get all the product cards on the page
+    let cards = document.getElementsByClassName('product-card');
+
+    // 3. Loop through every card
+    for (let i = 0; i < cards.length; i++) {
+        let name = cards[i].querySelector('.product-name').innerText.toLowerCase();
+        
+        // 4. If the name matches the search, show it; otherwise, hide it
+        if (name.includes(input)) {
+            cards[i].style.display = "flex";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
