@@ -59,39 +59,36 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-/* ================= CATEGORY SCROLL (BLINKIT STYLE) ================= */
+/* ================= CATEGORY SCROLL (FIXED) ================= */
 .category-grid {
-    display: flex;
-    overflow-x: auto;
+    display: flex !important;       /* Forces horizontal row */
+    overflow-x: auto !important;    /* Allows sliding */
     gap: 12px;
     padding: 5px 0 15px 0;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
 }
 
 .category-grid::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+    display: none;
 }
 
 .category-card {
-    flex: 0 0 auto;
-    width: 85px;
+    flex: 0 0 85px !important;     /* Keeps width consistent */
     background: #FFFFFF;
     border-radius: 12px;
     padding: 12px 8px;
     text-align: center;
     box-shadow: 0 2px 6px rgba(0,0,0,0.06);
     cursor: pointer;
-    transition: transform 0.1s;
-}
-
-.category-card:active {
-    transform: scale(0.95);
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
 }
 
 .cat-img {
     font-size: 28px;
     margin-bottom: 6px;
-    display: block; /* Forces icon above text */
+    display: block;
 }
 
 .category-card p {
@@ -173,19 +170,11 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.cart-item {
+.cart-item, .bill-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
     font-size: 14px;
-}
-
-.bill-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    font-size: 14px;
-    color: #666;
 }
 
 .total {
@@ -197,18 +186,12 @@ body {
     padding-top: 10px;
 }
 
-.checkout-form h3 {
-    margin-bottom: 15px;
-}
-
 .checkout-form input, .checkout-form select {
     width: 100%;
     padding: 12px;
     margin-bottom: 12px;
     border: 1px solid #DDD;
     border-radius: 8px;
-    font-size: 14px;
-    outline: none;
 }
 
 .confirm-btn {
@@ -220,7 +203,6 @@ body {
     border-radius: 12px;
     font-weight: 700;
     font-size: 16px;
-    cursor: pointer;
 }
 
 /* ================= FLOATING CART BAR ================= */
@@ -238,5 +220,4 @@ body {
     align-items: center;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     z-index: 1000;
-    cursor: pointer;
 }
