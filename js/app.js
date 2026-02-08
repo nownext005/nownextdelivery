@@ -186,3 +186,26 @@ function searchProducts() {
         }
     }
 }
+function renderProducts(items) {
+    const productList = document.getElementById('product-list');
+    if (!productList) return;
+
+    productList.innerHTML = items.map(product => `
+        <div class="product-card" data-category="${product.category}">
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/100?text=No+Image'">
+            </div>
+            <h4 class="product-name">${product.name}</h4>
+            <p class="product-qty">${product.qty}</p>
+            <div class="product-footer">
+                <span class="price">₹${product.price}</span>
+                <button class="add-btn" onclick="addToCart('${product.name}', ${product.price})">ADD</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Load products when page opens
+window.addEventListener('DOMContentLoaded', () => {
+    renderProducts(products);
+});
