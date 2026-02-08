@@ -46,18 +46,42 @@ function displayCart() {
     container.innerHTML = '';
 
     if (cart.length === 0) {
-        container.innerHTML = '<p>Your cart is empty.</p>';
+        container.innerHTML = '<p style="text-align:center; padding:20px;">Your cart is empty.</p>';
         return;
     }
 
     cart.forEach(item => {
+        // We add a flex container and a button that calls removeFromCart
         container.innerHTML += `
-            <div class="cart-item">
-                <span>${item.name} (x${item.quantity})</span>
+            <div class="cart-item" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button onclick="removeFromCart('${item.name}')" 
+                            style="background: #fdfdfd; color: #ff4d4d; border: 1px solid #ff4d4d; border-radius: 4px; width: 25px; height: 25px; cursor: pointer; font-weight: bold;">
+                        -
+                    </button>
+                    <span>${item.name} <strong>x${item.quantity}</strong></span>
+                </div>
                 <span>₹${item.price * item.quantity}</span>
             </div>
         `;
     });
+}
+
+function removeFromCart(name) {
+    const itemIndex = cart.findIndex(item => item.name === name);
+
+    if (itemIndex > -1) {
+        if (cart[itemIndex].quantity > 1) {
+            cart[itemIndex].quantity -= 1; // Reduce quantity
+        } else {
+            cart.splice(itemIndex, 1); // Remove item completely if qty is 1
+        }
+    }
+
+    saveCart();
+    updateFloatingCart();
+    displayCart(); // Refresh the cart list
+    if (typeof updateBill === "function") updateBill(); // Refresh the bill
 }
 
 // ================= BILL =================
